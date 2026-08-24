@@ -1,20 +1,27 @@
 # People Systems MCP
 
-Proyecto para gestionar y validar información de recursos humanos mediante archivos CSV y una capa HTTP con FastAPI. La estructura actual representa la Fase 3 del proyecto: datos, reglas de negocio, repositorio y API REST separadas por responsabilidades.
+Proyecto para gestionar datos de recursos humanos usando archivos CSV y una API REST con FastAPI. La versión actual ya está funcionando correctamente y refleja la estructura final de la Fase 3 del proyecto.
 
 ## Objetivo
 
-Construir una base modular para People Systems con:
+Crear una base modular para People Systems con:
 
-- validación de integridad de datos
-- separación por capas (repository, service, API)
-- pruebas automatizadas sobre los CSV
-- una base lista para evolucionar hacia MCP o servicios más complejos
+- datos de ejemplo reales y estructurados
+- validaciones de integridad sobre CSV
+- arquitectura por capas
+- API FastAPI funcional para consultar empleados, organizaciones y terminaciones
 
-## Arquitectura actual
+## Estructura actual del repositorio
 
 ```text
 people-systems-mcp/
+├── api/
+│   ├── __init__.py
+│   ├── exceptions.py
+│   ├── main.py
+│   ├── repository.py
+│   ├── schemas.py
+│   └── services.py
 ├── data/
 │   ├── employees.csv
 │   ├── organizations.csv
@@ -28,54 +35,61 @@ people-systems-mcp/
 │       └── validators.py
 ├── tests/
 │   └── test_data_consistency.py
-├── __init__.py
-├── exceptions.py
-├── main.py
-├── repository.py
-├── schemas.py
-├── services.py
 ├── .gitignore
 ├── pytest.ini
 ├── README.md
 ├── requirements.txt
+├── __init__.py
 └── venv/
 ```
 
 ## Capas del proyecto
 
-### 1. Repository
-Archivo: `repository.py`
+### API
+Carpeta: `api/`
 
-- carga los CSV desde `data/`
-- construye índices por ID
-- expone acceso centralizado a empleados, organizaciones, posiciones y terminaciones
+- `api/main.py`: aplica FastAPI y define los endpoints HTTP
+- `api/services.py`: lógica de negocio
+- `api/repository.py`: acceso a archivos CSV
+- `api/schemas.py`: modelos de salida Pydantic
+- `api/exceptions.py`: excepciones de dominio
 
-### 2. Services
-Archivo: `services.py`
+### Datos
+Carpeta: `data/`
 
-- contiene la lógica de negocio
-- valida existencia de registros
-- combina datos de diferentes entidades
-- lanza excepciones de dominio, no HTTP
+Contiene los CSV base:
 
-### 3. API / HTTP
-Archivo: `main.py`
+- `employees.csv`
+- `organizations.csv`
+- `positions.csv`
+- `terminations.csv`
 
-- expone endpoints con FastAPI
-- delega la lógica a `services.py`
-- transforma errores de dominio a `HTTPException`
+### Validaciones
+Archivo: `tests/test_data_consistency.py`
 
-### 4. Schemas
-Archivo: `schemas.py`
+Comprueba:
 
-- define los contratos de salida Pydantic
-- usados por FastAPI para serializar respuestas y documentación
+- unicidad de ids
+- referencias válidas entre entidades
+- validez de `job_level`
+- consistencia de `employment_status`
+- ausencia de ciclos en managers
+- integridad entre empleados y terminaciones
+- fechas coherentes
 
-### 5. Exceptions
-Archivo: `exceptions.py`
+## Endpoints activos
 
-- concentra errores del dominio
-- mantiene la capa de negocio desacoplada de FastAPI
+La API ya está funcionando con FastAPI y expone endpoints como:
+
+- `GET /employees/{employee_id}`
+- `GET /employees/{employee_id}/manager`
+- `GET /employees/{employee_id}/job`
+- `GET /employees/{employee_id}/termination`
+- `GET /organizations/{organization_id}`
+
+Documentación automática disponible en:
+
+- http://127.0.0.1:8000/docs
 
 ## Requisitos
 
@@ -117,36 +131,19 @@ source .venv/bin/activate
 pip install -r requirements.txt
 ```
 
-## Ejecución de la API
+## Ejecutar la API
 
 ```bash
-uvicorn main:app --reload
+uvicorn api.main:app --reload
 ```
 
-Luego abre:
-
-- http://127.0.0.1:8000/docs
-
-## Ejecución de pruebas
+## Ejecutar pruebas
 
 ```bash
 pytest tests/test_data_consistency.py -v
 ```
 
-## Validaciones actuales
-
-La suite comprueba:
-
-- unicidad de ids
-- integridad de referencias internas
-- autenticidad de managers
-- ausencia de ciclos jerárquicos
-- validación de `job_level`
-- validación de `employment_status`
-- coherencia entre empleados y terminaciones
-- fechas válidas y lógicas
-
-## Dependencias del proyecto
+## Dependencias actuales
 
 ```txt
 pytest==8.3.3
@@ -154,15 +151,15 @@ fastapi==0.115.0
 uvicorn[standard]==0.30.6
 ```
 
-## Estado del proyecto
+## Estado actual
 
-La Fase 3 ya quedó implementada con arquitectura por capas y acceso HTTP funcional. El proyecto está listo para seguir con una nueva etapa, por ejemplo:
+La versión actual ya funciona correctamente con FastAPI y tiene la estructura de proyecto lista para seguir con nuevas fases, por ejemplo:
 
 - MCP tools
-- validaciones de dominio más elaboradas
-- persistencia real (DB)
-- endpoints adicionales
-- autenticación y seguridad
+- autenticación
+- persistencia real
+- más endpoints y servicios
+- integración con base de datos
 
 ## Licencia
 
