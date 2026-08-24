@@ -1,0 +1,3 @@
+employee_id,termination_date,termination_reason,termination_type,last_working_day
+E009,2021-07-19,Position eliminated,Involuntary,2021-07-19
+E012,2020-01-05,Voluntary resignation,Voluntary,2020-01-05

@@ -1,0 +1,14 @@
+employee_id,name,country,organization_id,position_id,manager_id,employment_status,hire_date
+E001,Alicia Fernandez,US,ORG001,POS001,,Active,2018-01-15
+E002,Bruno Castillo,MX,ORG002,POS002,E001,Active,2019-03-01
+E003,Carla Jimenez,ES,ORG003,POS003,E001,Active,2019-06-10
+E004,Diego Ramirez,MX,ORG002,POS004,E002,Active,2020-02-20
+E005,Elena Torres,MX,ORG002,POS010,E002,Active,2021-05-11
+E006,Fernando Ortiz,MX,ORG004,POS007,E002,Active,2019-09-01
+E007,Gabriela Soto,MX,ORG004,POS006,E006,Active,2020-11-03
+E008,Hugo Medina,MX,ORG004,POS005,E006,Active,2022-01-10
+E009,Irene Paredes,MX,ORG004,POS005,E006,Terminated,2019-04-01
+E010,Javier Nunez,ES,ORG005,POS008,E003,Active,2020-04-15
+E011,Karina Blanco,ES,ORG005,POS009,E010,Active,2021-08-23
+E012,Luis Herrera,ES,ORG005,POS009,E010,Terminated,2019-02-01
+E013,Marta Delgado,ES,ORG003,POS011,E003,Active,2021-01-18

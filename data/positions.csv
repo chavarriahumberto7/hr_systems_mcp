@@ -1,0 +1,12 @@
+position_id,title,organization_id,job_level
+POS001,Chief People Officer,ORG001,Executive
+POS002,VP People LATAM,ORG002,Senior
+POS003,VP People EMEA,ORG003,Senior
+POS004,HR Business Partner,ORG002,Mid
+POS005,Software Engineer,ORG004,Mid
+POS006,Senior Software Engineer,ORG004,Senior
+POS007,Engineering Manager,ORG004,Senior
+POS008,Customer Success Manager,ORG005,Mid
+POS009,Customer Success Representative,ORG005,Junior
+POS010,Recruiter,ORG002,Junior
+POS011,HR Business Partner EMEA,ORG003,Mid

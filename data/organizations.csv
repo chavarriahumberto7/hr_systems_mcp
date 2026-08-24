@@ -1,0 +1,6 @@
+organization_id,name,country,parent_organization_id
+ORG001,Global People Solutions Inc,US,
+ORG002,People Solutions LATAM,MX,ORG001
+ORG003,People Solutions EMEA,ES,ORG001
+ORG004,Engineering LATAM,MX,ORG002
+ORG005,Customer Success EMEA,ES,ORG003
